@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Meow Clicker</string>
+    <string name="startButton_text">Start</string>
+    <string name="score_textView">Score</string>
+    <string name="yourScore_textView">Your Score:</string>
+    <string name="resetButton_text">Reset</string>
+
+
+</resources>
