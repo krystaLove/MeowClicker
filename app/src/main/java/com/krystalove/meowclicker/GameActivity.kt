@@ -16,8 +16,8 @@ class GameActivity : AppCompatActivity() {
 
     private var score = 0
 
-    private val prepareDuration: Long = 5
-    private val gameDuration: Long = 10
+    private var prepareDuration: Long = 0
+    private var gameDuration: Long = 0
     private var imageChooser = true
 
     private lateinit var prepareTimer: CountDownTimer
@@ -34,7 +34,8 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
-
+        prepareDuration = resources.getInteger(R.integer.prepareTime).toLong()
+        gameDuration = resources.getInteger(R.integer.gameTime).toLong()
 
         prepareAnimViewDrawable = prepareAnimView.drawable as GifDrawable
 
@@ -47,11 +48,10 @@ class GameActivity : AppCompatActivity() {
 
     inner class MyPrepareCounter(millisInFuture: Long, countDownInterval: Long) : CountDownTimer(millisInFuture, countDownInterval) {
 
-
         override fun onFinish() {
             timerTextView.text = "0"
 
-            clicker.setImageResource(R.drawable.prepareAnimation_end)
+            clicker.setImageResource(R.drawable.prepare_anim_end)
             prepareAnimViewDrawable.stop()
 
             gameTimer.start()
