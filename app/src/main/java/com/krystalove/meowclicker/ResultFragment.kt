@@ -3,13 +3,16 @@ package com.krystalove.meowclicker
 import android.R.attr.defaultValue
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.RatingBar
 import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_game.*
 
 
 class ResultFragment : Fragment() {
@@ -29,13 +32,19 @@ class ResultFragment : Fragment() {
 
         scoreResultFragment.text = score.toString()
 
-        rating.rating = score.toFloat() / 100
+        rating.rating = score.toFloat() / 80
 
         resetButton.setOnClickListener {
-            val intent = Intent(activity, GameActivity::class.java)
-            startActivity(intent)
-            activity!!.finish()
+            activity!!.resultFragment.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_out_left))
+            activity!!.resultFragment.visibility = View.GONE
+            Handler().postDelayed(Runnable { restart() }, 1000)
         }
         return view
+    }
+
+    private fun restart() {
+        val intent = Intent(activity, GameActivity::class.java)
+        startActivity(intent)
+        activity!!.finish()
     }
 }

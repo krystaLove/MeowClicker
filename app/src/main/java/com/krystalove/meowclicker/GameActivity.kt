@@ -18,6 +18,7 @@ class GameActivity : AppCompatActivity() {
 
     private var prepareDuration: Long = 0
     private var gameDuration: Long = 0
+
     private var imageChooser = true
 
     private lateinit var prepareTimer: CountDownTimer
@@ -34,13 +35,15 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
+        clickButton.isEnabled = false
+
         prepareDuration = resources.getInteger(R.integer.prepareTime).toLong()
         gameDuration = resources.getInteger(R.integer.gameTime).toLong()
 
         prepareAnimViewDrawable = prepareAnimView.drawable as GifDrawable
 
-        val myFadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out)
-        hud.startAnimation(myFadeOutAnimation)
+        val myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+        hud.startAnimation(myFadeInAnimation)
 
         prepareTimer = MyPrepareCounter(prepareDuration * TO_MILLIS, 1 * TO_MILLIS).start()
         gameTimer = MyGameCounter(gameDuration * TO_MILLIS, 1 * TO_MILLIS)
@@ -51,21 +54,12 @@ class GameActivity : AppCompatActivity() {
         override fun onFinish() {
             timerTextView.text = "0"
 
-            clicker.setImageResource(R.drawable.prepare_anim_end)
+            catView.setImageResource(R.drawable.prepare_anim_end)
             prepareAnimViewDrawable.stop()
 
             gameTimer.start()
-            clicker.setOnClickListener {
-                if (imageChooser) {
-                    imageChooser = false
-                    clicker.setImageResource(R.drawable.first_clap)
-                } else {
-                    imageChooser = true
-                    clicker.setImageResource(R.drawable.second_clap)
-                }
-                score++
-                updateScore()
-            }
+            clickButton.isClickable = true
+            clickButton.isEnabled = true
         }
 
         override fun onTick(millisUntilFinished: Long) {
@@ -91,14 +85,19 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    fun updateScore() {
+    private fun updateScore() {
         scoreTextView.text = score.toString()
     }
 
-    fun gameFinish() {
-        clicker.setOnClickListener(null)
+    private fun gameFinish() {
+        clickButton.isClickable = false
+        clickButton.isEnabled = false
         hud.isEnabled = false
-        hud.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in))
+
+        val fadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out)
+        fadeOutAnimation.duration = resources.getInteger(R.integer.transitionDuration).toLong() * TO_MILLIS
+
+        hud.startAnimation(fadeOutAnimation)
         hud.visibility = View.GONE
 
         Handler().postDelayed({
@@ -116,6 +115,18 @@ class GameActivity : AppCompatActivity() {
         }, 2000)
     }
 
+    fun doClick(view: View) {
+        if (imageChooser) {
+            imageChooser = false
+            catView.setImageResource(R.drawable.first_clap)
+        } else {
+            imageChooser = true
+            catView.setImageResource(R.drawable.second_clap)
+        }
+        score++
+        updateScore()
+    }
+
     public override fun onResume() {
         super.onResume()
         instance = this
@@ -125,5 +136,7 @@ class GameActivity : AppCompatActivity() {
         super.onPause()
         instance = null
     }
+
+
 }
 

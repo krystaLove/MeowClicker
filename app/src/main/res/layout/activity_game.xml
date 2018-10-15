@@ -20,7 +20,7 @@
             android:src="@drawable/prepare_anim" />
 
         <ImageView
-            android:id="@+id/clicker"
+            android:id="@+id/catView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY" />
@@ -65,6 +65,18 @@
             android:padding="16dp"
             android:progress="100"
             android:progressDrawable="@drawable/progressbar_drawable" />
+
+        <ImageButton
+            android:id="@+id/clickButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="80dp"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:onClick="doClick"
+            android:src="@drawable/click_button" />
 
     </RelativeLayout>
 

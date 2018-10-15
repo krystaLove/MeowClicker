@@ -11,11 +11,17 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : Activity() {
 
-    private var transitionTime: Long = 3000
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val transitionTime: Long = resources.getInteger(R.integer.transitionDuration).toLong() * 1000
+
+        val myFadeInAnim = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+        myFadeInAnim.duration = transitionTime
+        mainLayout.startAnimation(myFadeInAnim)
 
         val myButtonAnim = AnimationUtils.loadAnimation(this, R.anim.bounce)
 
@@ -27,7 +33,7 @@ class MainActivity : Activity() {
 
             startButton.isEnabled = false
 
-            val myFadeOutAnim = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+            val myFadeOutAnim = AnimationUtils.loadAnimation(this, R.anim.fade_out)
             myFadeOutAnim.duration = transitionTime
             mainLayout.visibility = View.GONE
             mainLayout.startAnimation(myFadeOutAnim)
