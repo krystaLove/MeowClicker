@@ -47,4 +47,5 @@ class ResultFragment : Fragment() {
         startActivity(intent)
         activity!!.finish()
     }
+
 }

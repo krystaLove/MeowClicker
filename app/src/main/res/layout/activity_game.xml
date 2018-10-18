@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity">
 
-
     <RelativeLayout
         android:id="@+id/hud"
         android:layout_width="match_parent"
@@ -30,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:padding="32dp"
+            android:layout_margin="32dp"
             android:textSize="45sp" />
 
         <LinearLayout
@@ -42,7 +41,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="16dp"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:text="@string/score_textView"
                 android:textSize="50sp" />
 
@@ -62,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:max="100"
-            android:padding="16dp"
+            android:layout_margin="@dimen/activity_vertical_margin"
             android:progress="100"
             android:progressDrawable="@drawable/progressbar_drawable" />
 

@@ -26,7 +26,6 @@ class GameActivity : AppCompatActivity() {
 
     private lateinit var prepareAnimViewDrawable: GifDrawable
 
-
     private val SCORE_TAG = "SCORE"
 
     var instance: GameActivity? = null
@@ -136,7 +135,6 @@ class GameActivity : AppCompatActivity() {
         super.onPause()
         instance = null
     }
-
 
 }
 

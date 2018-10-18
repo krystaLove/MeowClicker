@@ -33,6 +33,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'org.jetbrains.anko:anko-appcompat-v7:0.10.1'
     implementation 'com.flaviofaria:kenburnsview:1.0.7'
-    
+
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
 }
