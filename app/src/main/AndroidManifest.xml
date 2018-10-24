@@ -27,8 +27,7 @@
 
         <activity
             android:name=".GameActivity"
-            android:noHistory="true" />
-        <activity android:name=".Main2Activity"></activity>
+            android:noHistory="true"></activity>
     </application>
 
 </manifest>
